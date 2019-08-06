@@ -1,0 +1,82 @@
+// @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+// @import url('/assets/fonts/UbuntuRegular.ttf');
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.draggable {
+    min-height: 70vh;
+    cursor: move;
+    padding: 10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.12),0 1px 1px rgba(0,0,0,.24);
+    margin: 5px;
+    background-color: #f3f3f3;
+}
+
+.card-move {
+    transition: transform 0.5s;
+}
+
+.story {
+    margin: 10px;
+}
+
+.textarea {
+    resize: none;
+}
+
+.sticky {
+    position: sticky;
+    top: 80px;
+}
+
+.border-content {
+    border: 1px solid #7f7f7f;
+    padding: 2%;
+    width: auto;
+    height: auto;
+}
+
+.book-menu {
+    background-color: ghostwhite;
+}
+
+.wysiwyg-menu {
+    background-color: ghostwhite;
+    z-index: 1;
+    position: sticky;
+    top: 51px;
+    width: 734px;
+    margin-top: 2%;
+    margin-bottom: 0;
+}
+
+.page {
+    width: 734px;
+    height: auto;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.24);
+    padding: 2%;
+    background: ghostwhite;
+}
+
+.ProseMirror {
+    width: auto;
+    height: auto;
+    min-height: 950px;
+    line-height: normal;
+    text-align: justify;
+}
+
+
+.ProseMirror-focused {
+    outline: none;
+}
+
+.content p:not(:last-child), .content dl:not(:last-child), .content ol:not(:last-child), .content ul:not(:last-child), .content blockquote:not(:last-child), .content pre:not(:last-child), .content table:not(:last-child) {
+    margin-bottom: 0.25em;
+}
+
+.content blockquote {
+    height: auto;
+}

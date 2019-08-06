@@ -1,0 +1,236 @@
+{
+    "general": {
+        "confirm": "OK",
+        "cancel": "Annuler"
+    },
+    "brainstorm": {
+        "title": "Brainstorming",
+        "advice": {
+            "general": "Un conteur raconte à un auditeur ce que quelqu’un a fait pour obtenir ce qu’il souhaitait et pourquoi il l’a fait.",
+            "principle": "Une histoire traverse au minimum sept étapes de développement, entre son début et sa fin :\n1. Faiblesses et besoin\n2. Désir\n3. Adversaire\n4. Plan du héros\n5. Confrontation finale\n6. Prise de conscience\n7. Nouvel équilibre"
+        },
+        "premise": {
+            "label": "Prémisse",
+            "placeholder": "L’ensemble de votre récit condensé en une seule phrase."
+        },
+        "moral_problem": {
+            "label": "Problème moral",
+            "placeholder": "Le développement moral du héros commence par le besoin moral au début de l’histoire et se termine par une décision morale à la fin, qui fait suite à uneprise de conscience morale. Ce fil conducteur, celui de la leçon morale fondamentale que vous souhaitez exprimer, fournit le cadre, la trame morale de votre histoire."
+        },
+        "thema": {
+            "general": {
+                "label": "Ligne thématique",
+                "placeholder": "C’est votre point de vue moral, la façon dont vous pensez que les gens devraient agir dans le monde."
+            },
+            "symbol": {
+                "label": "Thème symbolique",
+                "placeholder": "Recherchez un symbole qui pourrait englober le thème de votre histoire. Ce symbole doit représenter une série d’actions qui ont des conséquences morales, ou, mieux encore, deux séries d’actions morales qui sont en conflit."
+            }
+        },
+        "challenge": {
+            "label": "Défi d'écriture",
+            "placeholder": "Il existe des règles de construction qui s’appliquent à toutes les histoires. Mais chaque histoire a également son propre ensemble de règles ou de défis spécifiques."
+        },
+        "designing_principle": {
+            "label": "Principe directeur",
+            "placeholder": "Le principe directeur, c’est ce qui organise l’histoire en tant que tout. C’est la logique interne du récit, qui cimente intrinsèquement les différentes parties, de sorte que l’histoire soit bien plus que la somme de ces parties. C’est ce qui rend l’histoire originale. Principe directeur = processus de l’histoire + développement original"
+        },
+        "symbol": {
+            "label": "Symbole de l’histoire",
+            "placeholder": "Existe-t-il un symbole qui pourrait exprimer votre prémisse, les rebondissements clefs de votre histoire, son  thème central, ou l’ensemble de sa structure ? Étudiez de nouveau votre prémisse, votre thème et la description en une phrase de l’univers de votre récit. Puis décrivez en une phrase les principaux symboles de votre histoire."
+        },
+        "hero": {
+            "label": "Héros",
+            "select": ""
+        }
+    },
+    "character": {
+        "title": "Édition du personnage",
+        "name": {
+            "label": "Nom",
+            "placeholder": "Son nom..."
+        },
+        "button": {
+            "save": "Enregistrer",
+            "cancel": "Annuler"
+        },
+        "advice": {
+            "general": "Quand on crée un héros ou un personnage quelconque, la plus importante des étapes consiste à le comparer et à le connecter à tous les autres."
+        },
+        "desire": {
+            "label": "Désir",
+            "placeholder": "Le désir, c’est ce que votre héros souhaite obtenir, son objectif dans l’histoire. L’histoire ne doit comporter qu’une seule ligne de désir, qui prend graduellement de l’ampleur en termes d’importance et d’intensité. Le désir doit être précis – et plus il sera précis, mieux cela sera. Le désir doit être accompli – si vous pensez qu’il doit l’être – vers la fin de l’histoire."
+        },
+        "plan_to_achieve_desire": {
+            "label": "Plan du désir",
+            "placeholder": "Dans la vie comme dans la narration, aucune action n’est possible sans plan. Le plan, c’est l’ensemble des directives, ou stratégies, que le héros suivra pour vaincre son adversaire et atteindre son objectif. Là encore, vous remarquerez que le plan est intrinsèquement lié au désir et à l’adversaire. Le plan devrait toujours être élaboré pour vaincre l’adversaire et atteindre l’objectif."
+        },
+        "role": {
+            "label": "Rôle",
+            "select": {
+                "H": "Héros",
+                "AD": "Adversaire",
+                "AL": "Allié",
+                "FAL": "Faux allié",
+                "FAD": "Faux adversaire"
+            }
+        },
+        "archetype": {
+            "label": "Archétype",
+            "select": {
+                "KF": "Le roi/Le père",
+                "QM": "La reine/La mère",
+                "OMT": "Le vieillard sage/Le mentor/Le professeur",
+                "W": "Le guerrier",
+                "MS": "Le magicien/Le shaman",
+                "T": "Le rusé (Trickster)",
+                "AC": "L'artiste/Le clown",
+                "L": "L'amoureux",
+                "R": "Le rebelle"
+            }
+        },
+        "description": {
+            "label": "Description",
+            "placeholder": "Description à votre convenance..."
+        },
+        "transformation": {
+            "general": {
+                "label": "Transformation",
+                "placeholder": "Une véritable transformation de personnage suppose une remise en question et une modification de ses croyances élémentaires, qui conduisent le héros à adopter un nouveau comportement moral. Il faut toujours partir de la fin de la transformation, c’est-à-dire de la prise de conscience ; puis revenir au début et déterminer le point de départ de la transformation, c’est-à-dire le besoin et le désir du héros ; et enfin, imaginer les étapes du développement qui se situent entre ce début et cette fin."
+            },
+            "symbol": {
+                "label": "Symbole de la transformation de personnage",
+                "placeholder": "Existe-t-il un symbole que vous pourriez connecter à la transformation de votre héros ? Si oui, examinez les scènes du début dans lesquelles vous avez exprimé la faiblesse et le besoin devotre héros, ainsi que celles de la fin qui correspondent à sa prise de conscience."
+            },
+            "sequence": {
+                "label": "Séquence de transformation",
+                "placeholder": "La transformation du personnage ne se produit pas à la fin de l’histoire ; elle est rendue possible dès le début par la façon dont vous la préparez. Ne concevez pas votre personnage principal comme une personne fixe et déterminée dont vous raconterez ensuite l’histoire. Vous devez penser votre héros comme un éventail de transformation, un éventail de possibilités, et ce dès le tout début. Il faut déterminer l’éventail de transformation dès le commencement du processus d’écriture, sans quoi le héros ne pourra pas subir sa transformation à la fin de l’histoire."
+            }
+        },
+        "strengths": {
+            "label": "Forces",
+            "placeholder": "Physical and moral things, things useful for the story..."
+        },
+        "weaknesses": {
+            "label": "Faiblesses",
+            "placeholder": "Weaknesses makes them more human, find weaknesses for the story..."
+        },
+        "values": {
+            "label": "Valeurs",
+            "placeholder": "Moral values, What they believe in..."
+        },
+        "symbols": {
+            "label": "Symboles",
+            "placeholder": "l faut toujours créer un réseau de symboles au sein duquel chaque symbole contribue à définir les autres."
+        },
+        "morale_decision": {
+            "label": "Décision morale",
+            "placeholder": "Le développement moral du héros commence par le besoin moral au début de l’histoire et se termine par une décision morale à la fin, qui fait suite à une prise de conscience morale. Ce fil conducteur, celui de la leçon morale fondamentale que vous souhaitez exprimer, fournit le cadre, la trame morale de votre histoire."
+        },
+        "realization": {
+            "label": "Prise de conscience",
+            "placeholder": "Pour le héros, la confrontation est une expérience intense et douloureuse. Cette épreuve de la confrontation le mène à une importante prise de conscience sur la véritable nature de son être. Dans une prise de conscience psychologique, le héros retire  le masque derrière lequel il vivait et se voit tel qu’il est vraiment pour la première fois."
+        },
+        "need": {
+            "label": "Besoin",
+            "placeholder": "Les personnages les plus mémorables ont tous un besoin moral et un besoin psychologique. Souvenez-vous de la différence entre les deux : le besoin psychologique n’affecte que le héros; le besoin moral implique la nécessité d’apprendre à agir correctement envers les autres. En donnant à votre héros un besoin qui soit à la fois moral et psychologique, vous augmentez l’impact du personnage sur l’histoire et, par là même, vous augmentez la puissance émotionnelle de l’histoire. Au début de l’histoire, votre héros ne doit pas savoir ce dont il a besoin. S’il sait déjà ce dont il a besoin, l’histoire est terminée."
+        }
+    },
+    "universe": {
+        "title": "L'Univers",
+        "general": {
+            "label": "Univers du récit",
+            "placeholder": "En se basant sur le principe directeur, écrire un monde qui doit incarner, mettre en valeur ou accentuer la faiblesse de votre héros, ou bien encore la représenter sous sa pire forme possible."
+        },
+        "symbol": {
+            "label": "Monde symbolique",
+            "placeholder": "Déterminez les symboles que vous souhaitez rattacher aux divers éléments de l’univers du récit, c’est-à-dire aux cadres naturels, aux espaces créés par l’Homme, à la technologie et au temps."
+        },
+        "arena": {
+            "label": "Arène globale",
+            "placeholder": "Définissez l’arène globale et réfléchissez à la façon dont vous vous y tiendrez tout au long de l’histoire. N’oubliez pas les quatre règles qui permettent de parvenir à un bon résultat\n1. Créer un espace général, puis alterner et condenser.\n2. Faire faire au héros un périple dans une zone globalement unifiée et qui se développe de manière linéaire.\n3. Faire faire au héros un  périple circulaire dans une zone globalement unifiée.\n4. Sortir le héros de son élément."
+        },
+        "oppositions": {
+            "label": "Oppositions de valeurs et oppositions visuelles",
+            "placeholder": "Revenez à votre réseau de personnages et identifiez les valeurs qui les opposent. Trouvez des oppositions visuelles qui complètent ou expriment ces oppositions de valeurs."
+        },
+        "territory": {
+            "label": "Territoire et populations",
+            "placeholder": "Expliquez la combinaison unique de territoire, populations et technologie qui composera le monde de votre histoire. Votre histoire peut par exemple se dérouler dans un paysage sauvage uniquement peuplé de quelques groupes de nomades qui utilisent les outils les plus rudimentaires. Ou bien dans une ville moderne où la nature a littéralement disparu et où la technologie est hautement avancée."
+        },
+        "technology": {
+            "general": {
+                "label": "Technologie",
+                "placeholder": "écrivez les objets déterminants de votre histoire, même s’il ne s’agit que d’outils triviaux de la vie quotidienne."
+            },
+            "symbol": {
+                "label": "Objets symboliques",
+                "placeholder": "Créez un réseau d’objets symboliques en vous appuyant sur le principe directeur de votre histoire. Veillez à ce que chacun des objets soit en adéquation avec le thème. Puis déterminez les objets auxquels vous souhaitez donner davantage de sens."
+            }
+        },
+        "system": {
+            "label": "Système",
+            "placeholder": "Si votre héros vit ou travaille dans un système (ou des systèmes),expliquez ses règles et sa hiérarchie en  termes de pouvoir ainsi que la place qu’occupe votre héros au sein de cette hiérarchie. Si votre héros est asservi par un système plus vaste, expliquez pourquoi il est incapable de comprendre son propre asservissement."
+        },
+        "canvas": {
+            "label": "Cadres naturels",
+            "placeholder": "Déterminez si l’un des principaux cadres naturels – océan, espace, forêt, jungle, désert, glace, île, montagne, plaine ou rivière – pourrait apporter quelque chose à votre monde en tant que tout. Veillez à n’utiliser aucun d’entre eux de façon prévisible ou incongrue."
+        },
+        "atmosphere": {
+            "label": "Conditions atmosphériques",
+            "placeholder": "De quelle façon le temps qu’il fait pourrait-il vous aider à détailler le monde de votre histoire ? Pensez aux relations que vous pouvez établir entre les moments dramatiques – tels que les rebondissements et les conflits – et les conditions atmosphériques. Là encore, évitez les clichés."
+        },
+        "spaces": {
+            "label": "Espaces créés par l’Homme",
+            "placeholder": "Comment les différents espaces créés par l’Homme dans lesquels vivent et travaillent vos personnages peuvent-ils  vous aider à exprimer la structure de votre histoire ?"
+        },
+        "miniatures": {
+            "label": "Miniatures",
+            "placeholder": "Demandez-vous si vous souhaitez ou non utiliser une miniature. Si oui, déterminez sa nature et expliquez de façon précise ce qu’elle représente."
+        },
+        "transformation": {
+            "label": "Transformation  du  héros  ou  transformation  du  monde",
+            "placeholder": "Étudiez de nouveau la transformation générale qui se produit au sein de votre héros. Décidez si le monde changera ou non avec lui, et, éventuellement, quelle forme prendra la transformation visuelle."
+        },
+        "seasons": {
+            "label": "Saisons",
+            "placeholder": "Y a-t-il une ou plusieurs saisons qui jouent un rôle important dans votre histoire ? Si tel est le cas, essayez  de trouver un moyen unique de connecter les saisons à la ligne dramatique."
+        },
+        "festivals": {
+            "label": "Fêtes et rituels",
+            "placeholder": "Si la philosophie d’une fête ou d’un rituel joue un rôle essentiel dans votre histoire, déterminez les points  sur lesquels vous êtes en accord ou désaccord avec cette philosophie. Puis connectez la fête ou le rituel aux moments appropriés de l’histoire."
+        }
+    },
+    "chronology": {
+        "title": "Chronologie des évenements",
+        "advice": "Ici, il faut préciser l'ordre chronologique des événements et non pas l'ordre de narration.",
+        "description": {
+            "label": "Description",
+            "placeholder": ""
+        },
+        "place": {
+            "label": "Endroit",
+            "placeholder": ""
+        },
+        "add": {
+            "title": "Ajouter un événement"
+        },
+        "delete": {
+            "confirmation": "Cet événement est utilisé dans la storyline. Voulez-vous vraiment le supprimer ?"
+        },
+        "empty": "Il n'existe pas encore de scènes insérées dans l'ordre des événements (Tissage des scènes)."
+    },
+    "character_list": {
+        "title": "Liste des personnages"
+    },
+    "scene_weave": {
+        "title": "Tissage des scènes",
+        "storyline": "Ordre des événements"
+    },
+    "writing": {
+        "title": "Écriture"
+    },
+    "export": {
+        "title": "Export"
+    }
+}

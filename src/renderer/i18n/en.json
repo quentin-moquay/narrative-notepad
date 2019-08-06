@@ -1,0 +1,54 @@
+{
+  "brainstorm": {
+    "title": "Brainstorming",
+    "advice" : {
+      "general": "Un conteur raconte à un auditeur ce que quelqu’un a fait pour obtenir ce qu’il souhaitait et pourquoi il l’a fait."
+    },
+    "premise": {
+      "label": "Premise:",
+      "placeholder": "Tell your premise"
+    }
+  },
+  "character": {
+    "name": {
+      "label": "Name",
+      "placeholder": ""
+    },
+    "desire": {
+      "label": "Desire",
+      "placeholder": "What does they want?"
+    },
+    "role": {
+      "label": "Role",
+      "placeholder": ""
+    },
+    "archetype": {
+      "label": "Archetype",
+      "placeholder": ""
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "Briefly describe they"
+    },
+    "transformation": {
+      "label": "Character change/Arc",
+      "placeholder": "Final transformation at the end..."
+    },
+    "strengths": {
+      "label": "Strengths",
+      "placeholder": "Physical and moral things, things useful for the story..."
+    },
+    "weaknesses": {
+      "label": "Weaknesses",
+      "placeholder": "Weaknesses makes them more human, find weaknesses for the story..."
+    },
+    "values": {
+      "label": "Values",
+      "placeholder": "Moral values, What they believe in..."
+    },
+    "symbols": {
+      "label": "Symbols",
+      "placeholder": "Which symbol(s) they represent ?"
+    }
+  }
+}
