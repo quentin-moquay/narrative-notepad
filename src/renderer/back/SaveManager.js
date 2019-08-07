@@ -3,55 +3,54 @@ import Options from '@/back/Options'
 export default class SaveManager {
   constructor () {
     if (!SaveManager.instance) {
-      this.fs = require('fs')
+      this.fs = require('fs').promises
       SaveManager.instance = this
       this.options = Options.instance.config
     }
     return SaveManager.instance
   }
-  saveModel (fileName, model, exclude = [], callback = () => {}) {
-    let toSave = {}
-    for (let key in model) {
+
+  saveModel (fileName, model, exclude = []) {
+    const toSave = {}
+    for (const key in model) {
       if (!exclude.includes(key)) {
         toSave[key] = model[key]
       }
     }
-    this.saveData(fileName, toSave, callback)
+    return this.saveData(fileName, JSON.stringify(toSave))
   }
+
   loadModel (fileName, model, callback = () => {}) {
-    this.loadData(fileName, (objData) => {
-      for (let key in objData) {
-        model[key] = objData[key]
-      }
-      callback(objData)
-    })
+    this.loadData(fileName)
+      .then(data => {
+        const objData = JSON.parse(data)
+        for (const key in objData) {
+          model[key] = objData[key]
+        }
+        callback(objData)
+      })
   }
-  saveCollection (fileName, collection, callback = () => {}) {
-    this.saveData(fileName, collection, callback)
+
+  saveCollection (fileName, collection) {
+    return this.saveData(fileName, JSON.stringify(collection))
   }
+
   loadCollection (fileName, collection, callback = () => {}) {
-    this.loadData(fileName, (objData) => {
-      collection.length = 0
-      objData.forEach(it => collection.push(it))
-      callback(objData)
-    })
+    this.loadData(fileName)
+      .then(data => {
+        const objData = JSON.parse(data)
+        collection.length = 0
+        objData.forEach(it => collection.push(it))
+        callback(objData)
+      })
   }
-  saveData (fileName, toSave, callback = () => {}) {
-    console.log(`${this.options.workingDir}${fileName}`)
-    this.fs.writeFile(`${this.options.workingDir}${fileName}`, JSON.stringify(toSave), 'utf8', () => {
-      callback()
-    })
+
+  saveData (fileName, toSave) {
+    return this.fs.writeFile(`${this.options.workingDir}${fileName}`, toSave, 'utf8')
   }
-  loadData (fileName, callback = () => {}) {
-    const errorProcessing = (err, data) => {
-      if (err) {
-        console.log(err)
-      } else {
-        let json = JSON.parse(data)
-        callback(json)
-      }
-    }
-    this.fs.readFile(`${this.options.workingDir}${fileName}`, 'utf8', errorProcessing)
+
+  loadData (fileName) {
+    return this.fs.readFile(`${this.options.workingDir}${fileName}`, 'utf8')
   }
 }
 

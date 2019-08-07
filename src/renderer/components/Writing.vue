@@ -110,7 +110,7 @@
       loadStoryline (events) {
         SaveManager.instance.loadCollection('storyline.json', [], (ids) => {
           ids.forEach(id => {
-            let idx = _.findIndex(events, {id: id})
+            let idx = _.findIndex(events, { id: id })
             this.storyline.push(events[idx])
           })
 
@@ -128,12 +128,16 @@
       },
       saveChapter (callback) {
         if (this.chapter.id) {
-          SaveManager.instance.saveData(`chapter_${this.chapter.id}.html`, this.editor.getHTML(), callback)
+          SaveManager.instance.saveData(`chapter_${this.chapter.id}.html`, this.editor.getHTML()).then(callback)
         }
       },
       loadChapter () {
-        SaveManager.instance.loadData(`chapter_${this.chapter.id}.html`, (data) => {
+        SaveManager.instance.loadData(`chapter_${this.chapter.id}.html`)
+        .then(data => {
           this.editor.setContent(data)
+        })
+        .catch(_ => {
+          this.editor.setContent('')
         })
       }
     },

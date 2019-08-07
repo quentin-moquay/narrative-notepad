@@ -6,7 +6,6 @@ export default class ExportPdf {
   constructor () {
     if (!ExportPdf.instance) {
       ExportPdf.instance = this
-      this.fs = require('fs')
       this.pdf = require('electron-phantom-html2pdf')
       this.options = Options.instance.config
     }
@@ -14,9 +13,11 @@ export default class ExportPdf {
   }
 
   exportPdf () {
-    SaveManager.instance.loadData('story_events.json', (storiesEvents) => {
-      SaveManager.instance.loadData('storyline.json', (storyline) => {
-        ExportPdf.instance.constructPdf(storiesEvents, storyline)
+    SaveManager.instance.loadData('story_events.json')
+    .then(storiesEvents => {
+      SaveManager.instance.loadData('storyline.json')
+      .then(storyline => {
+        ExportPdf.instance.constructPdf(JSON.parse(storiesEvents), JSON.parse(storyline))
       })
     })
   }
@@ -24,15 +25,15 @@ export default class ExportPdf {
   constructPdf (storiesEvents, storyline) {
     const content = []
     storyline.forEach((id, idx) => {
-      SaveManager.instance.loadData(`chapter_${id}.html`, (text) => {
-        const story = _.find(storiesEvents, {id: id})
+      SaveManager.instance.loadData(`chapter_${id}.html`)
+      .then(text => {
+        const story = _.find(storiesEvents, { id: id })
         content.push({
           order: idx,
           story: story,
           text: text
         })
         if (content.length === storyline.length) {
-          console.log('we finished to grab every content')
           ExportPdf.instance.generatePdf(content)
         }
       })
@@ -55,7 +56,7 @@ export default class ExportPdf {
     contentsTableData += '</tbody></table></div>'
     data += contentsTableData
 
-    let options = {
+    const options = {
       html: data,
       css: 'body {\n' +
         '    font-family: \'Ubuntu\', sans-serif;\n' +

@@ -73,7 +73,7 @@
       },
       confirmDelete: function (id) {
         this.deleteConfirmation = false
-        let idx = _.findIndex(this.events, {id: id})
+        let idx = _.findIndex(this.events, { id: id })
         this.$delete(this.events, idx)
 
         idx = _.findIndex(this.storyline, (it) => it === id)
@@ -117,7 +117,7 @@
         }
       },
       storyOrder: function () {
-        return _.sortBy(this.events, {order: 'desc'})
+        return _.sortBy(this.events, { order: 'desc' })
       }
     },
     created: function () {
