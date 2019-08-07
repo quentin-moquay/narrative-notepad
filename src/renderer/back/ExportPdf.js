@@ -1,4 +1,5 @@
 import SaveManager from '@/back/SaveManager'
+import Options from '@/back/Options'
 import _ from 'lodash'
 
 export default class ExportPdf {
@@ -7,7 +8,7 @@ export default class ExportPdf {
       ExportPdf.instance = this
       this.fs = require('fs')
       this.pdf = require('electron-phantom-html2pdf')
-      this.options = JSON.parse(this.fs.readFileSync('options.json', 'utf8'))
+      this.options = Options.instance.config
     }
     return ExportPdf.instance
   }

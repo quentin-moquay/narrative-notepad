@@ -1,10 +1,11 @@
+import Options from '@/back/Options'
 
 export default class SaveManager {
   constructor () {
     if (!SaveManager.instance) {
       this.fs = require('fs')
       SaveManager.instance = this
-      this.options = JSON.parse(this.fs.readFileSync('options.json', 'utf8'))
+      this.options = Options.instance.config
     }
     return SaveManager.instance
   }
