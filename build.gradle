@@ -3,10 +3,14 @@ plugins {
 }
 
 node {
-  version = '8.7.0'
+  version = '10.16.2'
   download = true
 }
 
+task version(type: NpmTask) {
+  group = 'application'
+  args = ['--version']
+}
 
 task bootRun(dependsOn: 'start') {
   group = 'application'
