@@ -3,7 +3,7 @@ import Options from '@/back/Options'
 export default class SaveManager {
   constructor () {
     if (!SaveManager.instance) {
-      this.fs = require('fs').promises
+      this.fs = require('fs')
       SaveManager.instance = this
       this.options = Options.instance.config
     }
@@ -49,11 +49,11 @@ export default class SaveManager {
   }
 
   saveData (fileName, toSave) {
-    return this.fs.writeFile(`${this.options.workingDir}${fileName}`, toSave, 'utf8')
+    return this.fs.writeFileAsync(`${this.options.workingDir}${fileName}`, toSave, 'utf8')
   }
 
   loadData (fileName) {
-    return this.fs.readFile(`${this.options.workingDir}${fileName}`, 'utf8')
+    return this.fs.readFileAsync(`${this.options.workingDir}${fileName}`, 'utf8')
   }
 }
 

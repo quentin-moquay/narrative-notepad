@@ -4,6 +4,10 @@ import App from './App'
 import 'bulma/bulma.sass'
 import '@/assets/scss/draggable.scss'
 import 'font-awesome/scss/font-awesome.scss'
+import Bluebird from 'bluebird'
+import fs from 'fs'
+
+Bluebird.promisifyAll(fs)
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.config.productionTip = false
