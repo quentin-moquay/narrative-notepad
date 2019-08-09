@@ -2,6 +2,9 @@ import SaveManager from '@/back/SaveManager'
 import Options from '@/back/Options'
 import _ from 'lodash'
 import Bluebird from 'bluebird'
+import ejs from 'ejs'
+import path from 'path'
+import fs from 'fs'
 
 export default class ExportPdf {
   constructor () {
@@ -41,35 +44,27 @@ export default class ExportPdf {
   }
 
   generatePdf (content) {
-    let contentsTableData = '<div style="page-break-after:always;"><table><tbody>'
-    let data = '<style>' +
-      'body {\n' +
-      '    font-family: \'Ubuntu\', sans-serif;\n' +
-      '    font-size: 12px;' +
-      '    text-align: justify;' +
-      '}' +
-      '</style>'
-    data += '<div style="page-break-after:always;"><h1>My Book</h1></div>'
-    _.sortBy(content, 'order').forEach((chapter, idx) => {
-      contentsTableData += '<tr>'
-      contentsTableData += `<td>${idx + 1}.${chapter.story.description}</td>`
-      contentsTableData += '</tr>'
+    Bluebird.join(
+      fs.readFileAsync(path.resolve('src/renderer/assets/book/pdf.css'), 'utf8'),
+      fs.readFileAsync(path.resolve('src/renderer/assets/book/pdf.ejs'), 'utf8'),
+      (css, template) => {
+        const mapping = {
+          css: css,
+          title: 'My Book',
+          chapters: _.sortBy(content, 'order')
+        }
+        let data = ejs.render(template, mapping, {})
+        fs.writeFileAsync(`${this.options.workingDir}output.html`, data, 'utf8').then(_ => console.log('html wrote'))
 
-      data += '<div style="page-break-after:always;">'
-      data += `<h2>${idx + 1}</h2>`
-      data += chapter.text
-      data += '</div>'
-    })
-    contentsTableData += '</tbody></table></div>'
-    data += contentsTableData
-
-    const options = {
-      border: '2.5cm'
-    }
-    this.pdf.create(data, options).toFile(`${this.options.workingDir}output.pdf`, function (err, res) {
-      if (err) return console.log(err)
-      console.log(res)
-    })
+        const options = {
+          border: '2.5cm'
+        }
+        this.pdf.create(data, options).toFile(`${this.options.workingDir}output.pdf`, function (err, res) {
+          if (err) return console.log(err)
+          console.log(res)
+        })
+      }
+    )
   }
 }
 

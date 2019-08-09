@@ -1,0 +1,44 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 12px;
+    text-align: justify;
+    counter-reset: chapternum;
+}
+
+.title {
+    text-align: center;
+    page-break-after: always;
+    page: cover;
+}
+
+.chapter {
+    page-break-after: always;
+}
+
+.chapter h2 {
+    text-align: center;
+}
+
+.chapter h2:before {
+    counter-increment: chapternum;
+    content: "– " counter(chapternum) " – ";
+}
+
+ul.toc {
+    counter-reset: tocnum;
+    page-break-after: always;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.toc li
+{
+    display: flex;
+}
+
+ul.toc li .toc_title:before
+{
+    counter-increment: tocnum;
+    content: "– " counter(tocnum) " – ";
+}

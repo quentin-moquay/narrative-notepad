@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+    <meta charset="utf-8"/>
+    <title><%= title %></title>
+    <style type="text/css">
+        <%-css%>
+    </style>
+</head>
+<body>
+
+<div class="title">
+    <%= title %>
+</div>
+
+<% chapters.forEach(function(chapter){ %>
+<div class="chapter">
+    <h2><%- chapter.story.description %></h2>
+    <p><%- chapter.text %></p>
+</div>
+<% }); %>
+
+<ul class="toc">
+    <% chapters.forEach(function(chapter){ %>
+    <li>
+        <span class="toc_title"><%- chapter.story.description %></span>
+    </li>
+    <% }); %>
+</ul>
+
+</body>
+</html>
