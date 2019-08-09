@@ -23,6 +23,7 @@
   import SaveManager from '@/back/SaveManager'
   import Draggable from 'vuedraggable'
   import StoryEvent from '@/components/Ui/StoryEvent'
+  import Bluebird from 'bluebird'
 
   export default {
     name: 'SceneWeave',
@@ -37,18 +38,16 @@
       StoryEvent
     },
     created () {
-      SaveManager.instance.loadCollection('story_events.json', this.events, this.loadStoryline)
-    },
-    methods: {
-      loadStoryline () {
-        SaveManager.instance.loadCollection('storyline.json', [], (ids) => {
-          ids.forEach(id => {
+      Bluebird.join(
+        SaveManager.instance.loadCollection('story_events.json', this.events),
+        SaveManager.instance.loadCollection('storyline.json'),
+        (events, storyline) => {
+          storyline.forEach(id => {
             let idx = _.findIndex(this.events, { id: id })
             this.storyline.push(this.events[idx])
             this.$delete(this.events, idx)
           })
         })
-      }
     },
     beforeDestroy () {
       SaveManager.instance.saveCollection('storyline.json', _.map(this.storyline, 'id'))

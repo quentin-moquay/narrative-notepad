@@ -35,14 +35,17 @@ export default class SaveManager {
     return this.saveData(fileName, JSON.stringify(collection))
   }
 
-  loadCollection (fileName, collection, callback = () => {}) {
-    this.loadData(fileName)
-      .then(data => {
-        const objData = JSON.parse(data)
-        collection.length = 0
-        objData.forEach(it => collection.push(it))
-        callback(objData)
-      })
+  loadCollection (fileName, collection = []) {
+    return new Promise((resolve, reject) => {
+      this.loadData(fileName)
+        .then(data => {
+          const objData = JSON.parse(data)
+          collection.length = 0
+          objData.forEach(it => collection.push(it))
+          resolve(objData)
+        })
+        .catch(err => reject(err))
+    })
   }
 
   saveData (fileName, toSave) {

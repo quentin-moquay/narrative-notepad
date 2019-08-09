@@ -79,6 +79,7 @@
   import SaveManager from '@/back/SaveManager'
   import { Editor, EditorMenuBar, EditorContent } from 'tiptap'
   import { Bold, Italic, Underline, History, OrderedList, BulletList, ListItem, Blockquote } from 'tiptap-extensions'
+  import Bluebird from 'bluebird'
 
   export default {
     name: 'Writing',
@@ -104,12 +105,11 @@
       }
     },
     created () {
-      SaveManager.instance.loadCollection('story_events.json', [], this.loadStoryline)
-    },
-    methods: {
-      loadStoryline (events) {
-        SaveManager.instance.loadCollection('storyline.json', [], (ids) => {
-          ids.forEach(id => {
+      Bluebird.join(
+        SaveManager.instance.loadCollection('story_events.json'),
+        SaveManager.instance.loadCollection('storyline.json'),
+        (events, storyline) => {
+          storyline.forEach(id => {
             let idx = _.findIndex(events, { id: id })
             this.storyline.push(events[idx])
           })
@@ -119,7 +119,8 @@
             this.loadChapter()
           }
         })
-      },
+    },
+    methods: {
       changeChapter (el) {
         this.saveChapter(() => {
           this.chapter = el
