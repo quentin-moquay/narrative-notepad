@@ -1,5 +1,6 @@
 <template>
 <span>
+    <story-event-form v-if="showForm" @cancel-edit="cancelEdit" @save-scene="saveScene" v-model="currentScene" />
     <confirmation :visible="deleteConfirmation" :id="deleteId" message="chronology.delete.confirmation" @cancel="cancelDelete" @confirm="confirmDelete" />
     <div class="columns">
         <div class="column is-one-quarter">
@@ -10,20 +11,20 @@
                 </header>
                 <div class="card-content">
                     <div class="content">
-                        <custom-text name="chronology.description" v-model="description" />
-                        <custom-text name="chronology.place" v-model="place" />
+                        <custom-text name="scene.description" v-model="description" />
+                        <custom-text name="scene.place" v-model="place" />
                     </div>
                 </div>
                 <footer class="card-footer">
-                    <button class="button" v-on:click="addStoryEvent"><i class="fa fa-plus"></i></button>
+                    <button class="button" v-on:click="addScene"><i class="fa fa-plus"></i></button>
                 </footer>
             </div>
         </div>
         <div class="column is-three-quarters">
-            <draggable class="draggable" v-model="events" @end="moveStory" group="story">
+            <draggable class="draggable" v-model="scenes" @end="moveScene" group="scene">
                 <transition-group type="transition" name="card">
-                    <div class="card story" v-for="(event,i) in events" :key="event.id">
-                        <story-event v-model="events[i]" @delete="checkDelete(event.id)" v-bind:editable="true" />
+                    <div class="card story" v-for="(scene,i) in scenes" :key="scene.id">
+                        <scene-card v-model="scenes[i]" @delete="checkDelete(scene.id)" @edit="editScene(i)" v-bind:editable="true" />
                     </div>
                 </transition-group>
             </draggable>
@@ -35,36 +36,42 @@
   import CustomTextArea from './Ui/CustomTextArea'
   import CustomText from './Ui/CustomText'
   import CustomSelect from './Ui/CustomSelect'
-  import StoryEventDomain from '@/domain/StoryEvent'
+  import Scene from '@/domain/Scene'
   import SaveManager from '@/back/SaveManager'
   import _ from 'lodash'
-  import StoryEvent from '@/components/Ui/StoryEvent'
   import Confirmation from '@/components/Ui/Confirmation'
   import Draggable from 'vuedraggable'
+  import SceneForm from './SceneForm'
+  import SceneCard from './Ui/SceneCard'
 
   export default {
     name: 'Chronology',
     data: function () {
       return {
+        cloneScene: null,
+        currentScene: null,
+        currentIdx: 0,
+        showForm: false,
         deleteId: null,
         deleteConfirmation: false,
         description: '',
         place: '',
-        events: [],
+        scenes: [],
         storyline: []
       }
     },
     components: {
+      SceneCard,
+      SceneForm,
       CustomText,
       CustomSelect,
       CustomTextArea,
       Draggable,
-      StoryEvent,
       Confirmation
     },
     methods: {
-      addStoryEvent: function () {
-        this.events.push(new StoryEventDomain(this.nextId, this.description, this.place, this.nextOrder))
+      addScene: function () {
+        this.scenes.push(new Scene(this.nextId, this.description, this.place, this.nextOrder))
         this.description = ''
         this.place = ''
       },
@@ -73,8 +80,8 @@
       },
       confirmDelete: function (id) {
         this.deleteConfirmation = false
-        let idx = _.findIndex(this.events, { id: id })
-        this.$delete(this.events, idx)
+        let idx = _.findIndex(this.scenes, { id: id })
+        this.$delete(this.scenes, idx)
 
         idx = _.findIndex(this.storyline, (it) => it === id)
         if (idx) {
@@ -86,6 +93,12 @@
           it.order = index++
         })
       },
+      editScene: function (idx) {
+        this.currentIdx = idx
+        this.currentScene = this.scenes[this.currentIdx]
+        this.cloneScene = _.clone(this.currentScene)
+        this.showForm = true
+      },
       checkDelete: function (id) {
         if (_.includes(this.storyline, id)) {
           this.deleteId = id
@@ -94,38 +107,49 @@
           this.confirmDelete(id)
         }
       },
-      moveStory: function () {
+      moveScene: function () {
         let index = 1
-        this.events.forEach(it => {
+        this.scenes.forEach(it => {
           it.order = index++
         })
+      },
+      // Signals
+      saveScene: function () {
+        this.showForm = false
+      },
+      cancelEdit: function () {
+        this.showForm = false
+        if (this.cloneScene) {
+          // cancel edit modifications
+          this.scenes[this.currentIdx] = this.cloneScene
+        }
       }
     },
     computed: {
       nextId: function () {
-        if (_.isEmpty(this.events)) {
+        if (_.isEmpty(this.scenes)) {
           return 1
         } else {
-          return _.max(_.map(this.events, 'id')) + 1
+          return _.max(_.map(this.scenes, 'id')) + 1
         }
       },
       nextOrder: function () {
-        if (_.isEmpty(this.events)) {
+        if (_.isEmpty(this.scenes)) {
           return 1
         } else {
-          return _.max(_.map(this.events, 'order')) + 1
+          return _.max(_.map(this.scenes, 'order')) + 1
         }
       },
       storyOrder: function () {
-        return _.sortBy(this.events, { order: 'desc' })
+        return _.sortBy(this.scenes, { order: 'desc' })
       }
     },
     created: function () {
-      SaveManager.instance.loadCollection('story_events.json', this.events)
+      SaveManager.instance.loadCollection('scenes.json', this.scenes)
       SaveManager.instance.loadCollection('storyline.json', this.storyline)
     },
     beforeDestroy: function () {
-      SaveManager.instance.saveCollection('story_events.json', this.events)
+      SaveManager.instance.saveCollection('scenes.json', this.scenes)
       SaveManager.instance.saveCollection('storyline.json', this.storyline)
     }
   }

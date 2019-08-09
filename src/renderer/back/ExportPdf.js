@@ -18,7 +18,7 @@ export default class ExportPdf {
 
   exportPdf () {
     Bluebird.join(
-      SaveManager.instance.loadData('story_events.json'),
+      SaveManager.instance.loadData('scenes.json'),
       SaveManager.instance.loadData('storyline.json'),
       (storiesEvents, storyline) => {
         ExportPdf.instance.constructPdf(JSON.parse(storiesEvents), JSON.parse(storyline))

@@ -106,7 +106,7 @@
     },
     created () {
       Bluebird.join(
-        SaveManager.instance.loadCollection('story_events.json'),
+        SaveManager.instance.loadCollection('scenes.json'),
         SaveManager.instance.loadCollection('storyline.json'),
         (events, storyline) => {
           storyline.forEach(id => {

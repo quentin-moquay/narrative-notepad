@@ -4,7 +4,7 @@
             <h2>{{ $t("chronology.title") }}</h2>
             <draggable class="draggable" v-model="events" tag="div" group="story">
                 <div class="card story" v-for="(event,i) in events" :key="event.order">
-                    <story-event v-model="events[i]" />
+                    <scene-card v-model="events[i]" />
                 </div>
             </draggable>
         </div>
@@ -12,7 +12,7 @@
             <h2>{{ $t("scene_weave.storyline") }}</h2>
             <draggable class="draggable" v-model="storyline" group="story">
                 <div class="card story" v-for="(event,i) in storyline" :key="event.id">
-                    <story-event v-model="storyline[i]" />
+                    <scene-card v-model="storyline[i]" />
                 </div>
             </draggable>
         </div>
@@ -22,7 +22,7 @@
   import _ from 'lodash'
   import SaveManager from '@/back/SaveManager'
   import Draggable from 'vuedraggable'
-  import StoryEvent from '@/components/Ui/StoryEvent'
+  import SceneCard from '@/components/Ui/SceneCard'
   import Bluebird from 'bluebird'
 
   export default {
@@ -35,11 +35,11 @@
     },
     components: {
       Draggable,
-      StoryEvent
+      SceneCard
     },
     created () {
       Bluebird.join(
-        SaveManager.instance.loadCollection('story_events.json', this.events),
+        SaveManager.instance.loadCollection('scenes.json', this.events),
         SaveManager.instance.loadCollection('storyline.json'),
         (events, storyline) => {
           storyline.forEach(id => {
