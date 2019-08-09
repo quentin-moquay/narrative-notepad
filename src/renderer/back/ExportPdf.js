@@ -1,6 +1,7 @@
 import SaveManager from '@/back/SaveManager'
 import Options from '@/back/Options'
 import _ from 'lodash'
+import Bluebird from 'bluebird'
 
 export default class ExportPdf {
   constructor () {
@@ -13,30 +14,29 @@ export default class ExportPdf {
   }
 
   exportPdf () {
-    SaveManager.instance.loadData('story_events.json')
-    .then(storiesEvents => {
-      SaveManager.instance.loadData('storyline.json')
-      .then(storyline => {
+    Bluebird.join(
+      SaveManager.instance.loadData('story_events.json'),
+      SaveManager.instance.loadData('storyline.json'),
+      (storiesEvents, storyline) => {
         ExportPdf.instance.constructPdf(JSON.parse(storiesEvents), JSON.parse(storyline))
       })
-    })
   }
 
   constructPdf (storiesEvents, storyline) {
+    const promises = []
     const content = []
-    storyline.forEach((id, idx) => {
-      SaveManager.instance.loadData(`chapter_${id}.html`)
-      .then(text => {
-        const story = _.find(storiesEvents, { id: id })
-        content.push({
-          order: idx,
-          story: story,
-          text: text
-        })
-        if (content.length === storyline.length) {
-          ExportPdf.instance.generatePdf(content)
-        }
+    storyline.forEach(id => {
+      promises.push(SaveManager.instance.loadData(`chapter_${id}.html`))
+    })
+    Bluebird.each(promises, (text, index, length) => {
+      const story = _.find(storiesEvents, {id: storyline[index]})
+      content.push({
+        order: index,
+        story: story,
+        text: text
       })
+    }).then(_ => {
+      ExportPdf.instance.generatePdf(content)
     })
   }
 
