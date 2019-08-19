@@ -26,8 +26,8 @@
                 <custom-text-area name="character.transformation.sequence" v-model="character.transformation.sequence" />
             </section>
             <footer class="modal-card-foot">
-                <button class="button" v-on:click="cancelEdit">{{ $t("character.button.cancel") }}</button>
-                <button class="button is-success" v-on:click="saveCharacter">{{ $t("character.button.save") }}</button>
+                <button class="button" v-on:click="cancelEdit">{{ $t("general.cancel") }}</button>
+                <button class="button is-success" v-on:click="saveCharacter">{{ $t("general.save") }}</button>
             </footer>
         </div>
     </div>
@@ -64,5 +64,3 @@
     }
   }
 </script>
-<style scoped>
-</style>
