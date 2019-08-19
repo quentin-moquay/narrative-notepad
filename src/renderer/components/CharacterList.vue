@@ -25,7 +25,7 @@
     </div>
 </template>
 <script>
-  import CharacterForm from '@/components/CharacterForm'
+  import CharacterForm from './CharacterList/CharacterForm'
   import Character from '@/domain/Character'
   import SaveManager from '@/back/SaveManager'
   import _ from 'lodash'

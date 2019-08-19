@@ -22,7 +22,7 @@
   import _ from 'lodash'
   import SaveManager from '@/back/SaveManager'
   import Draggable from 'vuedraggable'
-  import SceneCard from '@/components/Ui/SceneCard'
+  import SceneCard from './common/SceneCard'
   import Bluebird from 'bluebird'
 
   export default {

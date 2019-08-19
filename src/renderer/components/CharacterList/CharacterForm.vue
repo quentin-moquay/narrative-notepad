@@ -33,9 +33,9 @@
     </div>
 </template>
 <script>
-  import CustomTextArea from './Ui/CustomTextArea'
-  import CustomText from './Ui/CustomText'
-  import CustomSelect from './Ui/CustomSelect'
+  import CustomTextArea from '../Ui/CustomTextArea'
+  import CustomText from '../Ui/CustomText'
+  import CustomSelect from '../Ui/CustomSelect'
   import Character from '@/domain/Character'
 
   export default {

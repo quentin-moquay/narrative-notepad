@@ -27,10 +27,10 @@
 </template>
 
 <script>
-  import Scene from '../domain/Scene'
-  import CustomText from './Ui/CustomText'
-  import CustomTextArea from './Ui/CustomTextArea'
-  import CustomSelect from './Ui/CustomSelect'
+  import Scene from '../../domain/Scene'
+  import CustomText from '../Ui/CustomText'
+  import CustomTextArea from '../Ui/CustomTextArea'
+  import CustomSelect from '../Ui/CustomSelect'
 
   export default {
     name: 'SceneForm',

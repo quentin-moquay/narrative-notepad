@@ -41,8 +41,8 @@
   import _ from 'lodash'
   import Confirmation from '@/components/Ui/Confirmation'
   import Draggable from 'vuedraggable'
-  import SceneForm from './SceneForm'
-  import SceneCard from './Ui/SceneCard'
+  import SceneForm from './Chronology/SceneForm'
+  import SceneCard from './common/SceneCard'
 
   export default {
     name: 'Chronology',
