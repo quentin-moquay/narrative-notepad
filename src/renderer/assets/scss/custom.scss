@@ -1,6 +1,8 @@
 // @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
 // @import url('/assets/fonts/UbuntuRegular.ttf');
 
+@import '../../../../node_modules/bulma/bulma.sass';
+
 body {
     font-family: 'Ubuntu', sans-serif;
 }
@@ -79,4 +81,14 @@ body {
 
 .content blockquote {
     height: auto;
+}
+
+.writing-hints {
+    margin-bottom: 2%;
+    background-color: $primary;
+    color: white;
+}
+
+.writing-hints>.card-header>.card-header-title {
+    color: white;
 }

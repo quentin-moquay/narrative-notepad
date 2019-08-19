@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import App from './App'
-import 'bulma/bulma.sass'
 import '@/assets/scss/custom.scss'
 import 'font-awesome/scss/font-awesome.scss'
 import Bluebird from 'bluebird'

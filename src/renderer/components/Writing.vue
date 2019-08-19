@@ -12,7 +12,7 @@
             </ul>
         </aside>
         </div>
-        <div class="column is-three-quarters" v-if="isEmpty">
+        <div class="column is-half" v-if="isEmpty">
             <editor-menu-bar class="wysiwyg-menu" :editor="editor" v-slot="{ commands, isActive }">
                 <div class="tabs is-centered">
                     <ul>
@@ -67,7 +67,26 @@
             </editor-menu-bar>
             <editor-content class="page content" :editor="editor" />
         </div>
-        <div class="column is-three-quarters" v-else>
+        <div class="column is-one-quarter">
+            <div class="sticky border-content" style="background: ghostwhite;">
+                <div class="rows">
+                    <template v-for="item in ['place', 'arcPosition', 'problem', 'strategy', 'leader', 'desire', 'desirePurpose']">
+                        <div v-if="chapter[item]" class="row card writing-hints">
+                            <header class="card-header">
+                                <p class="card-header-title">{{$t(`scene.${item}.label`)}}</p>
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{chapter[item]}}
+                                </div>
+                            </div>
+                            <footer class="card-footer"></footer>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <div class="column is-three-quarters" v-if="!isEmpty">
             <div class="notification">
                 {{$t("chronology.empty")}}
             </div>
