@@ -7,6 +7,9 @@ export default class Options {
     }
     return Options.instance
   }
+  save () {
+    this.fs.writeFileSync('options.json', JSON.format(this.config), 'utf8')
+  }
 }
 
 const instance = new Options()

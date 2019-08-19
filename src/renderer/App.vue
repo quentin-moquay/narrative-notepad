@@ -25,6 +25,7 @@
   import SceneWeave from './components/SceneWeave'
   import Writing from './components/Writing'
   import Export from './components/Export'
+  import Options from '@/back/Options'
 
   export default {
     name: 'narrative-notepad',
@@ -39,7 +40,7 @@
     },
     data: function () {
       return {
-        selected: 'export',
+        selected: 'brainstorm',
         menu: ['brainstorm', 'character_list', 'universe', 'chronology', 'scene_weave', 'writing', 'export']
       }
     },
@@ -47,6 +48,9 @@
       change: function (event) {
         this.selected = event
       }
+    },
+    created: function () {
+      this.selected = Options.instance.config.selected
     }
   }
 </script>
