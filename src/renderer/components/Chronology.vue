@@ -1,6 +1,6 @@
 <template>
 <span>
-    <story-event-form v-if="showForm" @cancel-edit="cancelEdit" @save-scene="saveScene" v-model="currentScene" />
+    <scene-form v-if="showForm" @cancel-edit="cancelEdit" @save-scene="saveScene" v-model="currentScene" />
     <confirmation :visible="deleteConfirmation" :id="deleteId" message="chronology.delete.confirmation" @cancel="cancelDelete" @confirm="confirmDelete" />
     <div class="columns">
         <div class="column is-one-quarter">
