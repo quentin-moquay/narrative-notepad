@@ -1,7 +1,7 @@
 <template>
-    <div class="columns has-background-grey-lighter">
+    <div class="columns">
         <div class="column is-one-quarter">
-        <aside class="menu sticky book-menu border-content">
+        <aside class="menu sticky has-background-ghostwhite border-content">
             <p class="menu-label">
                 Storyline
             </p>
@@ -13,7 +13,7 @@
         </aside>
         </div>
         <div class="column is-half" v-if="isEmpty">
-            <editor-menu-bar class="wysiwyg-menu" :editor="editor" v-slot="{ commands, isActive }">
+            <editor-menu-bar class="wysiwyg-menu has-background-ghostwhite" :editor="editor" v-slot="{ commands, isActive }">
                 <div class="tabs is-centered">
                     <ul>
                         <li :class="{ 'is-active': isActive.bold() }" @click="commands.bold">
@@ -65,13 +65,13 @@
                     </ul>
                 </div>
             </editor-menu-bar>
-            <editor-content class="page content" :editor="editor" />
+            <editor-content class="page has-background-ghostwhite content" :editor="editor" />
         </div>
         <div class="column is-one-quarter">
-            <div class="sticky border-content" style="background: ghostwhite;">
+            <div class="sticky border-content has-background-ghostwhite">
                 <div class="rows">
                     <template v-for="item in ['place', 'arcPosition', 'problem', 'strategy', 'leader', 'desire', 'desirePurpose']">
-                        <div v-if="chapter[item]" class="row card writing-hints">
+                        <div v-if="chapter[item]" class="row card">
                             <header class="card-header">
                                 <p class="card-header-title">{{$t(`scene.${item}.label`)}}</p>
                             </header>

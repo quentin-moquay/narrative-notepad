@@ -1,5 +1,5 @@
 <template>
-    <div class="field" :is="decorated ? 'div' : 'span'">
+    <div class="field border-content has-background-ghostwhite" :is="decorated ? 'div' : 'span'">
         <label class="label" v-if="decorated" :for="name">{{$t(`${name}.label`)}}</label>
         <select :value="value ? value : null"
             @change="changeValue($event)"

@@ -5,14 +5,16 @@
               {{ $t(item+".title") }}
           </a>
       </nav>
-      <section class="section">
-        <brainstorm v-if="selected === menu[0]" />
-        <character-list v-if="selected === menu[1]" />
-        <universe v-if="selected === menu[2]" />
-        <chronology v-if="selected === menu[3]" />
-        <scene-weave v-if="selected === menu[4]" />
-        <writing v-if="selected === menu[5]" />
-        <export v-if="selected === menu[6]" />
+      <section class="hero">
+          <div class="hero-body">
+            <brainstorm v-if="selected === menu[0]" />
+            <character-list v-if="selected === menu[1]" />
+            <universe v-if="selected === menu[2]" />
+            <chronology v-if="selected === menu[3]" />
+            <scene-weave v-if="selected === menu[4]" />
+            <writing v-if="selected === menu[5]" />
+            <export v-if="selected === menu[6]" />
+          </div>
       </section>
   </div>
 </template>

@@ -2,7 +2,7 @@
     <div class="columns">
         <div class="column is-half">
             <h2>{{ $t("chronology.title") }}</h2>
-            <draggable class="draggable" v-model="events" tag="div" group="story">
+            <draggable class="draggable border-content" v-model="events" tag="div" group="story">
                 <div class="card story" v-for="(event,i) in events" :key="event.order">
                     <scene-card v-model="events[i]" />
                 </div>
@@ -10,7 +10,7 @@
         </div>
         <div class="column is-half">
             <h2>{{ $t("scene_weave.storyline") }}</h2>
-            <draggable class="draggable" v-model="storyline" group="story">
+            <draggable class="draggable border-content" v-model="storyline" group="story">
                 <div class="card story" v-for="(event,i) in storyline" :key="event.id">
                     <scene-card v-model="storyline[i]" />
                 </div>
