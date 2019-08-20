@@ -1,9 +1,11 @@
 <template>
   <div id="app" class="ui centered grid">
-      <nav class="navbar is-fixed-top is-primary">
-          <a v-for="item in menu" class="navbar-item" :class="{'is-active':item === selected}" @click="change(item)">
-              {{ $t(item+".title") }}
-          </a>
+      <nav class="tabs is-fullwidth">
+          <ul>
+          <li v-for="item in menu" :class="{'is-active':item === selected}">
+              <a @click="change(item)">{{ $t(item+".title") }}</a>
+          </li>
+          </ul>
       </nav>
       <section class="hero">
           <div class="hero-body">

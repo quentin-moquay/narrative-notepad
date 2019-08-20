@@ -117,3 +117,26 @@ a.navbar-item.is-active:not(:focus):not(:hover), .navbar-link.is-active:not(:foc
     color: black;
     background-color: ghostwhite;
 }
+
+nav {
+    position: sticky;
+    top: 0px;
+    z-index: 999;
+    background-color: black;
+}
+
+nav.tabs a {
+    color: white;
+}
+
+nav.tabs a:hover {
+    color: $info;
+}
+
+nav.tabs li.is-active a {
+    color: $info;
+}
+
+nav.tabs ul {
+    border-bottom-color: grey;
+}
