@@ -55,10 +55,10 @@
     },
     methods: {
       loadPage: function () {
-        SaveManager.instance.loadModel('universe.json', this._data)
+        SaveManager.instance.loadModel('universe.json', this._data, () => { this.$bus.$emit('loading', false) })
       },
       savePage: function () {
-        SaveManager.instance.saveModel('universe.json', this._data)
+        return SaveManager.instance.saveModel('universe.json', this._data)
       }
     }
   }

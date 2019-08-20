@@ -140,11 +140,12 @@
               this.chapter = this.storyline[0]
               this.loadChapter()
             }
-          })
+          }).finally(() => { this.$bus.$emit('loading', false) })
       },
       savePage () {
         this.saveChapter(() => {
           this.editor.destroy()
+          this.$bus.$emit('loading', false)
         })
       },
       changeChapter (el) {
@@ -156,6 +157,8 @@
       saveChapter (callback) {
         if (this.chapter.id) {
           SaveManager.instance.saveData(`chapter_${this.chapter.id}.html`, this.editor.getHTML()).then(callback)
+        } else {
+          this.$bus.$emit('loading', false)
         }
       },
       loadChapter () {

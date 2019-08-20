@@ -6,10 +6,36 @@
   export default {
     name: 'Page',
     created () {
-      this.loadPage()
+      this.$bus.$on('loading', state => {
+        this.loading(state)
+      })
+
+      if (this.loadPage) {
+        this.loading(true)
+        this.loadPage()
+      }
     },
     beforeDestroy () {
-      this.savePage()
+      if (this.savePage) {
+        this.loading(true)
+        let promise = this.savePage()
+        if (promise) {
+          promise.finally(() => { this.loading(false) })
+        }
+      }
+    },
+    methods: {
+      loading (state) {
+        if (state) {
+          this.loader = this.$loading.show({
+            container: null,
+            canCancel: true,
+            onCancel: this.onCancel
+          })
+        } else {
+          this.loader.hide()
+        }
+      }
     }
   }
 </script>

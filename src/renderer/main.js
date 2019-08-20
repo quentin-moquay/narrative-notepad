@@ -5,6 +5,8 @@ import '@/assets/scss/custom.scss'
 import 'font-awesome/scss/font-awesome.scss'
 import Bluebird from 'bluebird'
 import fs from 'fs'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 Bluebird.promisifyAll(fs)
 
@@ -23,6 +25,10 @@ const i18n = new VueI18n({
   locale,
   messages
 })
+
+Vue.use(Loading)
+
+Vue.prototype.$bus = new Vue()
 
 /* eslint-disable no-new */
 new Vue({

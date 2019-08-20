@@ -50,10 +50,11 @@
               this.storyline.push(this.events[idx])
               this.$delete(this.events, idx)
             })
+            this.$bus.$emit('loading', false)
           })
       },
       savePage () {
-        SaveManager.instance.saveCollection('storyline.json', _.map(this.storyline, 'id'))
+        return SaveManager.instance.saveCollection('storyline.json', _.map(this.storyline, 'id'))
       }
     }
   }

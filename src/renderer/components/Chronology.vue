@@ -33,6 +33,7 @@
 </span>
 </template>
 <script>
+  import Bluebird from 'bluebird'
   import CustomTextArea from './Ui/CustomTextArea'
   import CustomText from './Ui/CustomText'
   import CustomSelect from './Ui/CustomSelect'
@@ -73,12 +74,17 @@
     },
     methods: {
       loadPage: function () {
-        SaveManager.instance.loadCollection('scenes.json', this.scenes)
-        SaveManager.instance.loadCollection('storyline.json', this.storyline)
+        Bluebird.all([
+          SaveManager.instance.loadCollection('scenes.json', this.scenes),
+          SaveManager.instance.loadCollection('storyline.json', this.storyline)])
+          .then(() => {
+            this.$bus.$emit('loading', false)
+          })
       },
       savePage: function () {
-        SaveManager.instance.saveCollection('scenes.json', this.scenes)
-        SaveManager.instance.saveCollection('storyline.json', this.storyline)
+        return Bluebird.all([
+          SaveManager.instance.saveCollection('scenes.json', this.scenes),
+          SaveManager.instance.saveCollection('storyline.json', this.storyline)])
       },
       addScene: function () {
         this.scenes.push(new Scene(this.nextId, this.description, this.place, this.nextOrder))

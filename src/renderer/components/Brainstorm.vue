@@ -44,10 +44,10 @@
     },
     methods: {
       loadPage: function () {
-        SaveManager.instance.loadModel('brainstorm.json', this._data)
+        SaveManager.instance.loadModel('brainstorm.json', this._data, () => { this.$bus.$emit('loading', false) })
       },
       savePage: function () {
-        SaveManager.instance.saveModel('brainstorm.json', this._data)
+        return SaveManager.instance.saveModel('brainstorm.json', this._data)
       }
     }
   }
