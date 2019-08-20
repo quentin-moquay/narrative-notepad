@@ -12,7 +12,7 @@
             </ul>
         </aside>
         </div>
-        <div class="column is-half" v-if="isEmpty">
+        <div class="column is-half" v-if="!isEmpty">
             <editor-menu-bar class="wysiwyg-menu has-background-ghostwhite" :editor="editor" v-slot="{ commands, isActive }">
                 <div class="tabs is-centered">
                     <ul>
@@ -67,7 +67,7 @@
             </editor-menu-bar>
             <editor-content class="page has-background-ghostwhite content" :editor="editor" />
         </div>
-        <div class="column is-one-quarter">
+        <div class="column is-one-quarter" v-if="!isEmpty">
             <div class="sticky border-content has-background-ghostwhite">
                 <div class="rows">
                     <template v-for="item in ['place', 'arcPosition', 'problem', 'strategy', 'leader', 'desire', 'desirePurpose']">
@@ -86,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <div class="column is-three-quarters" v-if="!isEmpty">
+        <div class="column is-three-quarters" v-if="isEmpty">
             <div class="notification">
                 {{$t("chronology.empty")}}
             </div>
@@ -170,7 +170,7 @@
     },
     computed: {
       isEmpty () {
-        return this.storyline.length > 0
+        return this.storyline.length <= 0
       }
     },
     components: {
