@@ -43,8 +43,10 @@
   import Draggable from 'vuedraggable'
   import SceneForm from './Chronology/SceneForm'
   import SceneCard from './common/SceneCard'
+  import Page from './common/Page'
 
   export default {
+    extends: Page,
     name: 'Chronology',
     data: function () {
       return {
@@ -70,6 +72,14 @@
       Confirmation
     },
     methods: {
+      loadPage: function () {
+        SaveManager.instance.loadCollection('scenes.json', this.scenes)
+        SaveManager.instance.loadCollection('storyline.json', this.storyline)
+      },
+      savePage: function () {
+        SaveManager.instance.saveCollection('scenes.json', this.scenes)
+        SaveManager.instance.saveCollection('storyline.json', this.storyline)
+      },
       addScene: function () {
         this.scenes.push(new Scene(this.nextId, this.description, this.place, this.nextOrder))
         this.description = ''
@@ -143,14 +153,6 @@
       storyOrder: function () {
         return _.sortBy(this.scenes, { order: 'desc' })
       }
-    },
-    created: function () {
-      SaveManager.instance.loadCollection('scenes.json', this.scenes)
-      SaveManager.instance.loadCollection('storyline.json', this.storyline)
-    },
-    beforeDestroy: function () {
-      SaveManager.instance.saveCollection('scenes.json', this.scenes)
-      SaveManager.instance.saveCollection('storyline.json', this.storyline)
     }
   }
 </script>

@@ -22,8 +22,10 @@
   import CustomText from './Ui/CustomText'
   import CustomSelect from './Ui/CustomSelect'
   import SaveManager from '@/back/SaveManager'
+  import Page from './common/Page'
 
   export default {
+    extends: Page,
     name: 'Universe',
     data: function () {
       return {
@@ -51,11 +53,13 @@
       CustomSelect,
       CustomTextArea
     },
-    created: function () {
-      SaveManager.instance.loadModel('universe.json', this._data)
-    },
-    beforeDestroy: function () {
-      SaveManager.instance.saveModel('universe.json', this._data)
+    methods: {
+      loadPage: function () {
+        SaveManager.instance.loadModel('universe.json', this._data)
+      },
+      savePage: function () {
+        SaveManager.instance.saveModel('universe.json', this._data)
+      }
     }
   }
 </script>

@@ -99,8 +99,10 @@
   import { Editor, EditorMenuBar, EditorContent } from 'tiptap'
   import { Bold, Italic, Underline, History, OrderedList, BulletList, ListItem, Blockquote } from 'tiptap-extensions'
   import Bluebird from 'bluebird'
+  import Page from './common/Page'
 
   export default {
+    extends: Page,
     name: 'Writing',
     data: function () {
       return {
@@ -123,23 +125,28 @@
         })
       }
     },
-    created () {
-      Bluebird.join(
-        SaveManager.instance.loadCollection('scenes.json'),
-        SaveManager.instance.loadCollection('storyline.json'),
-        (events, storyline) => {
-          storyline.forEach(id => {
-            let idx = _.findIndex(events, { id: id })
-            this.storyline.push(events[idx])
-          })
-
-          if (this.storyline.length > 0) {
-            this.chapter = this.storyline[0]
-            this.loadChapter()
-          }
-        })
-    },
     methods: {
+      loadPage () {
+        Bluebird.join(
+          SaveManager.instance.loadCollection('scenes.json'),
+          SaveManager.instance.loadCollection('storyline.json'),
+          (events, storyline) => {
+            storyline.forEach(id => {
+              let idx = _.findIndex(events, { id: id })
+              this.storyline.push(events[idx])
+            })
+
+            if (this.storyline.length > 0) {
+              this.chapter = this.storyline[0]
+              this.loadChapter()
+            }
+          })
+      },
+      savePage () {
+        this.saveChapter(() => {
+          this.editor.destroy()
+        })
+      },
       changeChapter (el) {
         this.saveChapter(() => {
           this.chapter = el
@@ -169,11 +176,6 @@
     components: {
       EditorContent,
       EditorMenuBar
-    },
-    beforeDestroy () {
-      this.saveChapter(() => {
-        this.editor.destroy()
-      })
     }
   }
 </script>

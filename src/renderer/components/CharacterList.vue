@@ -29,8 +29,10 @@
   import Character from '@/domain/Character'
   import SaveManager from '@/back/SaveManager'
   import _ from 'lodash'
+  import Page from './common/Page'
 
   export default {
+    extends: Page,
     name: 'CharacterList',
     data: function () {
       return {
@@ -42,6 +44,12 @@
       }
     },
     methods: {
+      loadPage: function () {
+        SaveManager.instance.loadModel('characters.json', this._data)
+      },
+      savePage: function () {
+        SaveManager.instance.saveModel('characters.json', this._data, ['list', 'currentCharacter', 'cloneCharacter', 'currentIdx'])
+      },
       createCharacter: function () {
         this.currentCharacter = new Character()
         this.cloneCharacter = null
@@ -75,12 +83,6 @@
     },
     components: {
       CharacterForm
-    },
-    created: function () {
-      SaveManager.instance.loadModel('characters.json', this._data)
-    },
-    beforeDestroy: function () {
-      SaveManager.instance.saveModel('characters.json', this._data, ['list', 'currentCharacter', 'cloneCharacter', 'currentIdx'])
     }
   }
 </script>

@@ -24,8 +24,10 @@
   import Draggable from 'vuedraggable'
   import SceneCard from './common/SceneCard'
   import Bluebird from 'bluebird'
+  import Page from './common/Page'
 
   export default {
+    extends: Page,
     name: 'SceneWeave',
     data: function () {
       return {
@@ -37,20 +39,22 @@
       Draggable,
       SceneCard
     },
-    created () {
-      Bluebird.join(
-        SaveManager.instance.loadCollection('scenes.json', this.events),
-        SaveManager.instance.loadCollection('storyline.json'),
-        (events, storyline) => {
-          storyline.forEach(id => {
-            let idx = _.findIndex(this.events, { id: id })
-            this.storyline.push(this.events[idx])
-            this.$delete(this.events, idx)
+    methods: {
+      loadPage () {
+        Bluebird.join(
+          SaveManager.instance.loadCollection('scenes.json', this.events),
+          SaveManager.instance.loadCollection('storyline.json'),
+          (events, storyline) => {
+            storyline.forEach(id => {
+              let idx = _.findIndex(this.events, {id: id})
+              this.storyline.push(this.events[idx])
+              this.$delete(this.events, idx)
+            })
           })
-        })
-    },
-    beforeDestroy () {
-      SaveManager.instance.saveCollection('storyline.json', _.map(this.storyline, 'id'))
+      },
+      savePage () {
+        SaveManager.instance.saveCollection('storyline.json', _.map(this.storyline, 'id'))
+      }
     }
   }
 </script>
