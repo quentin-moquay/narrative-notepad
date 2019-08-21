@@ -12,7 +12,7 @@
             </ul>
         </aside>
         </div>
-        <div class="column is-half" v-if="!isEmpty">
+        <div ref="page" class="column is-half" v-if="!isEmpty">
             <editor-menu-bar class="wysiwyg-menu has-background-ghostwhite" :editor="editor" v-slot="{ commands, isActive }">
                 <div class="tabs is-centered">
                     <ul>
@@ -171,6 +171,7 @@
       },
       loadChapter () {
         return new Promise((resolve, reject) => {
+          let loader = this.$loading.show({ container: this.$refs.page })
           SaveManager.instance.loadData(`chapter_${this.chapter.id}.html`)
           .then(data => {
             this.editor.setContent(data)
@@ -179,6 +180,9 @@
           .catch(err => {
             this.editor.setContent('')
             reject(err)
+          })
+          .finally(_ => {
+            loader.hide()
           })
         })
       }

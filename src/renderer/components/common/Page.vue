@@ -6,10 +6,6 @@
   export default {
     name: 'Page',
     created () {
-      this.$bus.$on('loading', state => {
-        this.loading(state)
-      })
-
       if (this.loadPage) {
         this.loading(true)
         let promise = this.loadPage()
@@ -30,11 +26,7 @@
     methods: {
       loading (state) {
         if (state) {
-          this.loader = this.$loading.show({
-            container: null,
-            canCancel: true,
-            onCancel: this.onCancel
-          })
+          this.loader = this.$loading.show()
         } else {
           this.loader.hide()
         }
