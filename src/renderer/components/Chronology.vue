@@ -74,12 +74,9 @@
     },
     methods: {
       loadPage: function () {
-        Bluebird.all([
+        return Bluebird.all([
           SaveManager.instance.loadCollection('scenes.json', this.scenes),
           SaveManager.instance.loadCollection('storyline.json', this.storyline)])
-          .then(() => {
-            this.$bus.$emit('loading', false)
-          })
       },
       savePage: function () {
         return Bluebird.all([

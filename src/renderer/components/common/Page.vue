@@ -12,7 +12,10 @@
 
       if (this.loadPage) {
         this.loading(true)
-        this.loadPage()
+        let promise = this.loadPage()
+        if (promise) {
+          promise.finally(() => { this.loading(false) })
+        }
       }
     },
     beforeDestroy () {

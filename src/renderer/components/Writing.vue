@@ -127,7 +127,7 @@
     },
     methods: {
       loadPage () {
-        Bluebird.join(
+        return Bluebird.join(
           SaveManager.instance.loadCollection('scenes.json'),
           SaveManager.instance.loadCollection('storyline.json'),
           (events, storyline) => {
@@ -135,39 +135,51 @@
               let idx = _.findIndex(events, { id: id })
               this.storyline.push(events[idx])
             })
-
-            if (this.storyline.length > 0) {
-              this.chapter = this.storyline[0]
+            return this.storyline
+          }).then((storyline) => {
+            if (storyline.length > 0) {
+              this.chapter = storyline[0]
               this.loadChapter()
+              return null
             }
-          }).finally(() => { this.$bus.$emit('loading', false) })
+          })
       },
       savePage () {
-        this.saveChapter(() => {
+        return this.saveChapter()
+        .then(() => {
           this.editor.destroy()
           this.$bus.$emit('loading', false)
         })
       },
       changeChapter (el) {
-        this.saveChapter(() => {
+        this.saveChapter()
+        .then(() => {
           this.chapter = el
           this.loadChapter()
         })
       },
-      saveChapter (callback) {
-        if (this.chapter.id) {
-          SaveManager.instance.saveData(`chapter_${this.chapter.id}.html`, this.editor.getHTML()).then(callback)
-        } else {
-          this.$bus.$emit('loading', false)
-        }
+      saveChapter () {
+        return new Promise((resolve, reject) => {
+          if (this.chapter.id) {
+            SaveManager.instance.saveData(`chapter_${this.chapter.id}.html`, this.editor.getHTML())
+            .then(o => resolve(o))
+            .catch(err => reject(err))
+          } else {
+            resolve()
+          }
+        })
       },
       loadChapter () {
-        SaveManager.instance.loadData(`chapter_${this.chapter.id}.html`)
-        .then(data => {
-          this.editor.setContent(data)
-        })
-        .catch(_ => {
-          this.editor.setContent('')
+        return new Promise((resolve, reject) => {
+          SaveManager.instance.loadData(`chapter_${this.chapter.id}.html`)
+          .then(data => {
+            this.editor.setContent(data)
+            resolve(data)
+          })
+          .catch(err => {
+            this.editor.setContent('')
+            reject(err)
+          })
         })
       }
     },

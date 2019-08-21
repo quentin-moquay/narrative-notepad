@@ -41,7 +41,7 @@
     },
     methods: {
       loadPage () {
-        Bluebird.join(
+        return Bluebird.join(
           SaveManager.instance.loadCollection('scenes.json', this.events),
           SaveManager.instance.loadCollection('storyline.json'),
           (events, storyline) => {
@@ -50,7 +50,6 @@
               this.storyline.push(this.events[idx])
               this.$delete(this.events, idx)
             })
-            this.$bus.$emit('loading', false)
           })
       },
       savePage () {
