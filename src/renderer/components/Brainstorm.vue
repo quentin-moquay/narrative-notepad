@@ -10,7 +10,7 @@
             <custom-text-area name="brainstorm.challenge" v-model="challenge"/>
             <custom-text-area name="brainstorm.designing_principle" v-model="designing_principle"/>
             <custom-text-area name="brainstorm.symbol" v-model="symbol"/>
-            <custom-select name="brainstorm.hero"/>
+            <custom-select-model name="brainstorm.hero" :list="characters" v-model="heros" display="name" id="id"/>
         </div>
     </div>
 </template>
@@ -18,8 +18,8 @@
   import Page from './common/Page'
   import CustomTextArea from './Ui/CustomTextArea'
   import CustomText from './Ui/CustomText'
-  import CustomSelect from './Ui/CustomSelect'
   import SaveManager from '@/back/SaveManager'
+  import CustomSelectModel from './Ui/CustomSelectModel'
 
   export default {
     extends: Page,
@@ -34,20 +34,25 @@
         },
         challenge: '',
         designing_principle: '',
-        symbol: ''
+        symbol: '',
+        characters: [],
+        heros: null
       }
     },
     components: {
+      CustomSelectModel,
       CustomText,
-      CustomSelect,
       CustomTextArea
     },
     methods: {
       loadPage: function () {
-        return SaveManager.instance.loadModel('brainstorm.json', this._data)
+        return SaveManager.instance.loadCollection('characters.json', this.characters)
+          .then(response => {
+            return SaveManager.instance.loadModel('brainstorm.json', this._data)
+          })
       },
       savePage: function () {
-        return SaveManager.instance.saveModel('brainstorm.json', this._data)
+        return SaveManager.instance.saveModel('brainstorm.json', this._data, ['characters'])
       }
     }
   }

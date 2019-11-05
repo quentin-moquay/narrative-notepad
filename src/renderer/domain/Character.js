@@ -1,6 +1,7 @@
 
 export default class Character {
   constructor () {
+    this.id = -1
     this.name = ''
     this.role = ''
     this.archetype = ''

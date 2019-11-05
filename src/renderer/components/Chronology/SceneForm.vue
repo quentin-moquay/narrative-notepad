@@ -13,7 +13,7 @@
                 <custom-text-area name="scene.arcPosition" v-model="scene.arcPosition" />
                 <custom-text-area name="scene.problem" v-model="scene.problem" />
                 <custom-text-area name="scene.strategy" v-model="scene.strategy" />
-                <custom-select name="scene.leader" v-model="scene.strategy" />
+                <custom-select-model name="scene.leader" :list="characters" v-model="scene.leader" display="name" id="id"/>
                 <custom-text-area name="scene.desire" v-model="scene.desire" />
                 <custom-text-area name="scene.desirePurpose" v-model="scene.desirePurpose" />
                 <!-- TODO this.characters -->
@@ -30,19 +30,28 @@
   import Scene from '../../domain/Scene'
   import CustomText from '../Ui/CustomText'
   import CustomTextArea from '../Ui/CustomTextArea'
-  import CustomSelect from '../Ui/CustomSelect'
+  import CustomSelectModel from '../Ui/CustomSelectModel'
+  import SaveManager from '@/back/SaveManager'
+  import Page from '../common/Page'
 
   export default {
     name: 'SceneForm',
-    components: {CustomTextArea, CustomText, CustomSelect},
+    extends: Page,
+    components: {CustomTextArea, CustomText, CustomSelectModel},
     props: ['value'],
     data: function () {
       return {
-        scene: new Scene()
+        scene: new Scene(),
+        characters: []
       }
     },
     created: function () {
-      this.scene = this.value
+      this.loading(true)
+      SaveManager.instance.loadCollection('characters.json', this.characters)
+        .then(response => {
+          this.scene = this.value
+          this.loading(false)
+        })
     },
     methods: {
       cancelEdit: function () {

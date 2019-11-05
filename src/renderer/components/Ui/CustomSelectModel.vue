@@ -3,13 +3,13 @@
         <label class="label" v-if="decorated" :for="name">{{$t(`${name}.label`)}}</label>
         <div class="control">
             <div class="select">
-                <select :value="value ? value : null"
+                <select :value="value"
                         @change="changeValue($event)"
                         :name="name"
-                        :id="name"
-                >
-                    <option v-for="elem in values" v-if="elem" :value="elem" :key="elem">
-                        {{$t(`${name}.select.${elem}`)}}
+                        :id="name">
+                    <option value="--" :key="null"></option>
+                    <option v-for="elem in list" :value="getId(elem)" :key="getId(elem)">
+                        {{getDisplay(elem)}}
                     </option>
                 </select>
             </div>
@@ -18,10 +18,13 @@
 </template>
 <script>
     export default {
-      name: 'CustomSelect',
+      name: 'CustomSelectModel',
       props: {
-        value: String,
+        value: null, // any
+        list: Array,
         name: String,
+        display: String,
+        id: String,
         decorated: {
           type: Boolean,
           default: true
@@ -30,13 +33,13 @@
       methods: {
         changeValue: function (event) {
           this.$emit('input', event.target.value)
+        },
+        getId (element) {
+          return element[this.id]
+        },
+        getDisplay (element) {
+          return element[this.display]
         }
-      },
-      created () {
-        this.list = this.$t(`${this.name}.select`)
-        this.values = Object.keys(this.list)
       }
     }
 </script>
-<style scoped>
-</style>

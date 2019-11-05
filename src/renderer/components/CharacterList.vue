@@ -45,10 +45,10 @@
     },
     methods: {
       loadPage: function () {
-        return SaveManager.instance.loadModel('characters.json', this._data)
+        return SaveManager.instance.loadCollection('characters.json', this.characters)
       },
       savePage: function () {
-        return SaveManager.instance.saveModel('characters.json', this._data, ['list', 'currentCharacter', 'cloneCharacter', 'currentIdx'])
+        return SaveManager.instance.saveCollection('characters.json', this.characters)
       },
       createCharacter: function () {
         this.currentCharacter = new Character()
@@ -69,6 +69,12 @@
       saveCharacter: function (character) {
         this.showForm = false
         if (!this.characters.includes(character)) {
+          const max = _.maxBy(this.characters, 'id')
+          if (max) {
+            character.id = max.id + 1
+          } else {
+            character.id = 0
+          }
           this.characters.push(character)
         }
       },
