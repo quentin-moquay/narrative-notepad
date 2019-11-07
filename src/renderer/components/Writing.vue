@@ -76,7 +76,10 @@
                                 <p class="card-header-title">{{$t(`scene.${item}.label`)}}</p>
                             </header>
                             <div class="card-content">
-                                <div class="content">
+                                <div class="content" v-if="item === 'leader'">
+                                    {{getCharacterName(chapter[item])}}
+                                </div>
+                                <div class="content" v-else>
                                     {{chapter[item]}}
                                 </div>
                             </div>
@@ -106,6 +109,7 @@
     name: 'Writing',
     data: function () {
       return {
+        characters: [],
         storyline: [],
         chapter: {
           description: ''
@@ -128,9 +132,10 @@
     methods: {
       loadPage () {
         return Bluebird.join(
+          SaveManager.instance.loadCollection('characters.json', this.characters),
           SaveManager.instance.loadCollection('scenes.json'),
           SaveManager.instance.loadCollection('storyline.json'),
-          (events, storyline) => {
+          (characters, events, storyline) => {
             storyline.forEach(id => {
               let idx = _.findIndex(events, { id: id })
               this.storyline.push(events[idx])
@@ -185,6 +190,14 @@
             loader.hide()
           })
         })
+      },
+      getCharacterName (id) {
+        const character = _.find(this.characters, { id: parseInt(id) })
+        if (character) {
+          return character.name
+        } else {
+          return this.$t(`writing.error.character_not_found`)
+        }
       }
     },
     computed: {

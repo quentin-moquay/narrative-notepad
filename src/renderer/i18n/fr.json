@@ -217,7 +217,10 @@
     "storyline": "Ordre des événements"
   },
   "writing": {
-    "title": "Écriture"
+    "title": "Écriture",
+    "error": {
+      "character_not_found": "Personnage introuvable"
+    }
   },
   "export": {
     "title": "Export"
