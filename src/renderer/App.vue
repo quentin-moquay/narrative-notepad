@@ -1,14 +1,15 @@
 <template>
   <div id="app" class="ui centered grid">
-      <nav class="tabs is-fullwidth">
+      <nav class="tabs is-fullwidth" v-if="!isChooseProject">
           <ul>
-          <li v-for="item in menu" :class="{'is-active':item === selected}">
+          <li v-for="item in menu" v-bind:key="item" :class="{'is-active':item === selected}">
               <a @click="change(item)">{{ $t(item+".title") }}</a>
           </li>
           </ul>
       </nav>
       <section class="hero">
           <div class="hero-body">
+            <choose-project v-if="isChooseProject" @project="loadProject"/>
             <brainstorm v-if="selected === menu[0]" />
             <character-list v-if="selected === menu[1]" />
             <universe v-if="selected === menu[2]" />
@@ -17,7 +18,7 @@
             <writing v-if="selected === menu[5]" />
             <export v-if="selected === menu[6]" />
           </div>
-      </section>
+      </section>    
   </div>
 </template>
 
@@ -29,6 +30,7 @@
   import SceneWeave from './components/SceneWeave'
   import Writing from './components/Writing'
   import Export from './components/Export'
+  import ChooseProject from './components/ChooseProject'
   import Options from '@/back/Options'
 
   export default {
@@ -40,7 +42,8 @@
       Chronology,
       Universe,
       Brainstorm,
-      CharacterList
+      CharacterList,
+      ChooseProject
     },
     data: function () {
       return {
@@ -51,10 +54,19 @@
     methods: {
       change: function (event) {
         this.selected = event
+      },
+      loadProject () {
+        Options.instance.load()
+        this.selected = Options.instance.config.selected
+      }
+    },
+    computed: {
+      isChooseProject () {
+        return this.selected === 'choose-project'
       }
     },
     created: function () {
-      this.selected = Options.instance.config.selected
+      this.selected = 'choose-project'
     }
   }
 </script>
