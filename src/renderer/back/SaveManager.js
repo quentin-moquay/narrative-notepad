@@ -1,13 +1,16 @@
-import Options from '@/back/Options'
+import ProjectLoader from '@/back/ProjectLoader'
+import fs from 'fs'
 
 export default class SaveManager {
   constructor () {
     if (!SaveManager.instance) {
-      this.fs = require('fs')
       SaveManager.instance = this
-      this.options = Options.instance.config
     }
     return SaveManager.instance
+  }
+
+  getPath (path) {
+    return ProjectLoader.instance.getTempDir() + '/' + path
   }
 
   saveModel (fileName, model, exclude = []) {
@@ -52,11 +55,11 @@ export default class SaveManager {
   }
 
   saveData (fileName, toSave) {
-    return this.fs.writeFileAsync(`${this.options.workingDir}${fileName}`, toSave, 'utf8')
+    return fs.writeFileAsync(this.getPath(fileName), toSave, 'utf8')
   }
 
   loadData (fileName) {
-    return this.fs.readFileAsync(`${this.options.workingDir}${fileName}`, 'utf8')
+    return fs.readFileAsync(this.getPath(fileName), 'utf8')
   }
 }
 

@@ -1,16 +1,27 @@
+import fs from 'fs'
+import ProjectLoader from '@/back/ProjectLoader'
+
 export default class Options {
   constructor () {
     if (!Options.instance) {
       Options.instance = this
-      this.fs = require('fs')
-      this.config = JSON.parse(this.fs.readFileSync('options.json', 'utf8'))
     }
     return Options.instance
   }
+  init () {
+    this.config = {
+      selected: 'brainstorm'
+    }
+  }
+  load () {
+    this.config = JSON.parse(fs.readFileSync(this.getPath('options.json'), 'utf8'))
+  }
+  getPath (path) {
+    return ProjectLoader.instance.getTempDir() + '/' + path
+  }
   save () {
-    this.fs.writeFileSync('options.json', JSON.format(this.config), 'utf8')
+    fs.writeFileSync(this.getPath('options.json'), JSON.stringify(this.config), 'utf8')
   }
 }
 
 const instance = new Options()
-Object.freeze(instance)
