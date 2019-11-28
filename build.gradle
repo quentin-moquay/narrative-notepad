@@ -3,7 +3,7 @@ plugins {
 }
 
 node {
-  version = '10.16.2'
+  version = '12.8.1'
   download = true
 }
 
