@@ -6,6 +6,7 @@
  */
 
 /* eslint-disable */
+require('electron').app.commandLine.appendSwitch('inspect', '5858')
 
 // Install `electron-debug` with `devtron`
 require('electron-debug')({ showDevTools: true })
