@@ -12,6 +12,7 @@ require('electron').app.commandLine.appendSwitch('inspect', '5858')
 require('electron-debug')({ showDevTools: true })
 
 // Install `vue-devtools`
+// TODO not working with windows dark-mode https://github.com/electron/electron/issues/19468
 require('electron').app.on('ready', () => {
   let installExtension = require('electron-devtools-installer')
   installExtension.default(installExtension.VUEJS_DEVTOOLS)
