@@ -45,7 +45,7 @@
     </div>
 </template>
 <script>
-  
+  import _ from 'lodash'
   import CustomText from '@/components/Ui/CustomText'
   import ProjectLoader from '@/back/ProjectLoader'
   const {dialog} = require('electron').remote
@@ -81,14 +81,15 @@
         dialog.showOpenDialog({
           filters: [
             { name: 'Narrative Files', extensions: ['tar'] }
-          ]}, (project) => {
-          if (project === undefined) {
-            console.log('No file selected')
-            return
-          }
-
-          ProjectLoader.instance.load(project[0]).then(callback => this.$emit('project'))
-        })
+          ]})
+          .then(project => {
+            if (project === undefined || _.size(project.filePaths) === 0) {
+              console.log('No file selected')
+              return
+            }
+            console.log(project.filePaths[0])
+            ProjectLoader.instance.load(project.filePaths[0]).then(callback => this.$emit('project'))
+          })
       }
     }
   }
