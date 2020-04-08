@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, Menu, BrowserWindow, ipcMain } from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -23,9 +23,14 @@ app.on('ready', () => {
   })
   mainWindow.loadURL(winURL)
 
+  Menu.setApplicationMenu(null)
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+})
+
+ipcMain.on('closed', (evt, arg) => {
+  app.quit()
 })
 
 app.on('window-all-closed', () => {

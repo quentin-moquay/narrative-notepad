@@ -4,7 +4,7 @@
         <div class="content">
           <section class="section">
             <div class="container">
-              <h1 class="title">Create a new project</h1>
+              <h1 class="title">{{$t('project.create')}}</h1>
             </div>
             <div class="field is-horizontal">
               <div class="field-body">
@@ -15,7 +15,7 @@
                     </div>
                     <p class="control">
                       <button class="button is-link" v-on:click="chooseNewProject()">
-                        Choose directory from File system
+                        {{$t('general.browse')}}
                       </button>
                     </p>
                   </div>
@@ -24,18 +24,18 @@
             </div>
             <p class="control">
                 <button class="button is-info" v-on:click="createProject()">
-                  Create new project
+                  {{$t('project.create_confirm')}}
                 </button>
               </p>
           </section>
           <section class="section">
             <div class="container">
-              <h1 class="title">Load an existing project</h1>
+              <h1 class="title">{{$t('project.load')}}</h1>
             </div>
             <div class="field is-grouped">
               <p class="control">
                 <button class="button is-info" v-on:click="chooseProject()">
-                  Load a project
+                  {{$t('general.load')}}
                 </button>
               </p>
             </div>
@@ -45,7 +45,6 @@
     </div>
 </template>
 <script>
-  import _ from 'lodash'
   import CustomText from '@/components/Ui/CustomText'
   import ProjectLoader from '@/back/ProjectLoader'
   const {dialog} = require('electron').remote
@@ -78,18 +77,7 @@
         })
       },
       chooseProject () {
-        dialog.showOpenDialog({
-          filters: [
-            { name: 'Narrative Files', extensions: ['tar'] }
-          ]})
-          .then(project => {
-            if (project === undefined || _.size(project.filePaths) === 0) {
-              console.log('No file selected')
-              return
-            }
-            console.log(project.filePaths[0])
-            ProjectLoader.instance.load(project.filePaths[0]).then(callback => this.$emit('project'))
-          })
+        ProjectLoader.instance.choose()
       }
     }
   }

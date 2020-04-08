@@ -120,7 +120,7 @@ a.navbar-item.is-active:not(:focus):not(:hover), .navbar-link.is-active:not(:foc
 
 nav {
     position: sticky;
-    top: 0px;
+    top: 36px;
     z-index: 999;
     background-color: black;
 }
@@ -139,4 +139,8 @@ nav.tabs li.is-active a {
 
 nav.tabs ul {
     border-bottom-color: grey;
+}
+
+.dropdown-menu {
+    z-index: 1000;
 }

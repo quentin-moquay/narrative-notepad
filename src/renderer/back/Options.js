@@ -1,5 +1,5 @@
 import fs from 'fs'
-import ProjectLoader from '@/back/ProjectLoader'
+import ProjectLoader from './ProjectLoader'
 
 export default class Options {
   constructor () {

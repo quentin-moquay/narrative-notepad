@@ -1,8 +1,26 @@
 {
   "general": {
     "confirm": "OK",
+    "load": "Charger",
     "save": "Enregistrer",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "browse": "Parcourir"
+  },
+  "file": {
+    "label": "Fichier",
+    "exit": "Quitter le programme"
+  },
+  "export": {
+    "label": "Exporter",
+    "pdf": "Exporter le projet en PDF"
+  },
+  "project": {
+    "label": "Projet",
+    "create": "Créer un nouveau projet",
+    "create_confirm": "Créer le projet",
+    "load": "Charger un projet existant",
+    "save": "Sauvegarder le projet en cours",
+    "close": "Fermer le projet en cours"
   },
   "brainstorm": {
     "title": "Brainstorming",
@@ -221,9 +239,6 @@
     "error": {
       "character_not_found": "Personnage introuvable"
     }
-  },
-  "export": {
-    "title": "Export"
   },
   "scene": {
     "title": "Édition de scène",
